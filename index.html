@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shri Shri Mukteshwar Temple — Langabahal, Odisha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --stone: #8B7D6B;
+            --stone-light: #C4B5A0;
+            --earth: #5C4A3A;
+            --earth-dark: #3A2D22;
+            --cream: #F5F0E8;
+            --cream-light: #FAF7F2;
+            --sage: #6B7B5E;
+            --sage-light: #8FA07E;
+            --gold: #B8975A;
+            --text: #2C2418;
+            --text-light: #6B5D4F;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--cream-light);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+        }
+
+        nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.05em;
+            transition: color 0.4s;
+        }
+
+        nav.scrolled .logo { color: var(--earth-dark); }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav.scrolled .nav-links a { color: var(--text-light); }
+        nav .nav-links a:hover { color: var(--gold); }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        nav.scrolled .menu-toggle span { background: var(--earth-dark); }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                var(--earth-dark) 0%,
+                #4A3728 30%,
+                #5C4A3A 60%,
+                var(--stone) 100%
+            );
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.3" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(transparent, var(--cream-light));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 2rem;
+            max-width: 800px;
+        }
+
+        .hero-content .om {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-content .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--stone-light);
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        .btn-solid {
+            background: var(--earth);
+            border-color: var(--earth);
+            color: white;
+        }
+
+        .btn-solid:hover {
+            background: var(--earth-dark);
+            border-color: var(--earth-dark);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-hint span {
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+            margin: 0 auto;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--earth-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* About / History */
+        .about {
+            background: var(--cream-light);
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 700px;
+        }
+
+        .about-text p { margin-bottom: 1.5rem; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(139, 125, 107, 0.2);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--earth);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        /* Immersion */
+        .immersion {
+            background: var(--earth-dark);
+            color: white;
+        }
+
+        .immersion h2 { color: white; }
+        .immersion .section-label { color: var(--gold); }
+
+        .immersion-intro {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .feature-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        /* Daily Rhythm */
+        .rhythm {
+            background: var(--cream);
+        }
+
+        .schedule {
+            max-width: 600px;
+            margin-top: 2rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            gap: 2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(139, 125, 107, 0.15);
+        }
+
+        .schedule-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--earth);
+            min-width: 100px;
+        }
+
+        .schedule-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Availability */
+        .availability {
+            background: var(--cream-light);
+        }
+
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .month-card {
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid rgba(139, 125, 107, 0.2);
+            background: white;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .month-card.available {
+            cursor: pointer;
+            border-color: var(--sage);
+        }
+
+        .month-card.available:hover {
+            background: var(--sage);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(107, 123, 94, 0.2);
+        }
+
+        .month-card.limited {
+            border-color: var(--gold);
+        }
+
+        .month-card.full {
+            opacity: 0.4;
+        }
+
+        .month-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .month-status {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.4rem;
+        }
+
+        .month-card.available .month-status { color: var(--sage); }
+        .month-card.limited .month-status { color: var(--gold); }
+        .month-card.full .month-status { color: var(--text-light); }
+        .month-card.available:hover .month-status { color: rgba(255,255,255,0.8); }
+
+        .legend {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.available { background: var(--sage); }
+        .legend-dot.limited { background: var(--gold); }
+        .legend-dot.full { background: #ccc; }
+
+        /* Registration Form */
+        .register {
+            background: var(--earth-dark);
+            color: white;
+        }
+
+        .register h2 { color: white; }
+        .register .section-label { color: var(--gold); }
+
+        .register-intro {
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 700px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-group label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group select option { background: var(--earth-dark); color: white; }
+
+        .form-group textarea { min-height: 100px; resize: vertical; }
+
+        .form-note {
+            grid-column: 1 / -1;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 0.5rem;
+        }
+
+        .form-submit {
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit .btn {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--cream);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial {
+            padding: 2rem;
+            background: white;
+            border: 1px solid rgba(139, 125, 107, 0.1);
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .testimonial-author {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Location */
+        .location {
+            background: var(--cream-light);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+            align-items: start;
+        }
+
+        .map-embed {
+            width: 100%;
+            height: 350px;
+            background: var(--stone-light);
+            border: 1px solid rgba(139, 125, 107, 0.2);
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .directions h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--earth-dark);
+        }
+
+        .directions p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .directions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .directions li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(139, 125, 107, 0.1);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .directions li strong {
+            color: var(--earth);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--earth-dark);
+            color: rgba(255,255,255,0.5);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        footer .footer-om {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+
+            nav .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(250, 247, 242, 0.98);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+            }
+
+            nav .nav-links.open { display: flex; }
+            nav .nav-links a { color: var(--text-light) !important; }
+
+            .stat-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .location-grid { grid-template-columns: 1fr; }
+            .month-grid { grid-template-columns: repeat(3, 1fr); }
+
+            section { padding: 4rem 1.5rem; }
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <div class="logo">Mukteshwar</div>
+        <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#about">History</a></li>
+            <li><a href="#immersion">The Stay</a></li>
+            <li><a href="#rhythm">Daily Life</a></li>
+            <li><a href="#availability">Availability</a></li>
+            <li><a href="#register">Apply</a></li>
+            <li><a href="#location">Visit</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="om">ॐ</div>
+        <h1>Shri Shri Mukteshwar</h1>
+        <div class="subtitle">The Temple of Liberation</div>
+        <p>A 1500-year-old Shiva temple in the heart of Odisha, where seekers come to dwell in silence, stillness, and the sacred.</p>
+        <a href="#register" class="btn">Begin Your Stay</a>
+    </div>
+    <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- About / History -->
+<section class="about" id="about">
+    <div class="section-inner fade-in">
+        <div class="section-label">History & Significance</div>
+        <h2>Where Time Stands Still</h2>
+        <div class="about-text">
+            <p>Nestled in the village of Langabahal, Odisha, the Shri Shri Mukteshwar Temple has stood for over fifteen centuries as a living abode of Lord Shiva. The name <em>Mukteshwar</em> — "Lord of Liberation" — speaks to the essence of this place: a threshold between the worldly and the boundless.</p>
+            <p>Unlike the grand temple complexes of Bhubaneswar, Mukteshwar exists in intimate communion with nature. Surrounded by a tranquil lake and ancient trees, the temple sits at the lap of the earth itself — a place where the boundary between stone and spirit dissolves.</p>
+            <p>For centuries, seekers have been drawn here by an inexplicable pull. The temple's energy is palpable — visitors consistently describe a deep stillness that settles upon them, a quieting of the mind that happens without effort. This is not a place you visit. It is a place that visits you.</p>
+        </div>
+        <div class="stat-grid">
+            <div class="stat">
+                <div class="stat-number">1500+</div>
+                <div class="stat-label">Years of Worship</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">4.6★</div>
+                <div class="stat-label">Visitor Rating</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">30</div>
+                <div class="stat-label">Days of Immersion</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Stay / Immersion -->
+<section class="immersion" id="immersion">
+    <div class="section-inner fade-in">
+        <div class="section-label">Month-Long Immersion</div>
+        <h2>Dwell in the Sacred</h2>
+        <p class="immersion-intro">A month at Mukteshwar is not a retreat — it is a returning. You will live in the rhythm of the temple, participate in daily worship, and allow the stillness of this ancient place to work upon you. No agenda. No curriculum. Just presence.</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">🕉</div>
+                <h3>Temple Life</h3>
+                <p>Participate in morning and evening puja. Witness the ancient rituals that have continued unbroken for centuries. The temple opens at dawn — be there.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🧘</div>
+                <h3>Silent Sitting</h3>
+                <p>The temple's energy supports deep meditation naturally. Sit by the lake, beneath the ancient trees, or in the sanctum. Let stillness find you.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌿</div>
+                <h3>Simple Living</h3>
+                <p>Vegetarian meals. Minimal possessions. Early mornings. The simplicity is not a sacrifice — it is the practice itself. Less becomes infinitely more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🙏</div>
+                <h3>Seva</h3>
+                <p>Contribute to the temple's upkeep and the community. Cleaning, cooking, gardening — every act becomes an offering when done with awareness.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Daily Rhythm -->
+<section class="rhythm" id="rhythm">
+    <div class="section-inner fade-in">
+        <div class="section-label">A Day at Mukteshwar</div>
+        <h2>The Rhythm of the Temple</h2>
+        <div class="schedule">
+            <div class="schedule-item">
+                <div class="schedule-time">4:30 AM</div>
+                <div class="schedule-desc">Wake. Personal sadhana and ablutions.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">6:00 AM</div>
+                <div class="schedule-desc">Morning meditation by the lake.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">7:00 AM</div>
+                <div class="schedule-desc">Temple opens. Morning puja and darshan.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">8:30 AM</div>
+                <div class="schedule-desc">Breakfast. Simple, sattvic, nourishing.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">9:30 AM</div>
+                <div class="schedule-desc">Seva — temple and grounds maintenance.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">12:00 PM</div>
+                <div class="schedule-desc">Midday meal. Rest period.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">4:00 PM</div>
+                <div class="schedule-desc">Evening puja. Temple reopens.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">6:00 PM</div>
+                <div class="schedule-desc">Evening meditation. Quiet time.</div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">7:30 PM</div>
+                <div class="schedule-desc">Light dinner. Early rest.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="section-inner fade-in">
+        <div class="section-label">Visitor Voices</div>
+        <h2>What Seekers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-text">"Serene and divine at the lap of nature with deep rooted historical and spiritual connection."</div>
+                <div class="testimonial-author">— Kanhu Charan</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-text">"The most beautiful temple I have ever visited. It's surrounded by a small lake which makes it even more captivating. Your mind will simply be absorbed into the stillness."</div>
+                <div class="testimonial-author">— Sachidananda S.</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="testimonial-text">"Best place to visit with a very calm and quiet environment in between nature. The temple has fine, beautiful architecture. It looks so serene."</div>
+                <div class="testimonial-author">— Jasmin N.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Availability -->
+<section class="availability" id="availability">
+    <div class="section-inner fade-in">
+        <div class="section-label">Availability</div>
+        <h2>Choose Your Month</h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Each month, we welcome a limited number of seekers to ensure the sanctity and intimacy of the experience. Select a month below to begin your application.</p>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot available"></div> Available</div>
+            <div class="legend-item"><div class="legend-dot limited"></div> Few Spots Left</div>
+            <div class="legend-item"><div class="legend-dot full"></div> Full</div>
+        </div>
+        <div class="month-grid" id="monthGrid">
+            <!-- Populated by JS -->
+        </div>
+        <p style="color: var(--text-light); font-size: 0.85rem;">Availability updates regularly. Apply early — spaces are limited to preserve the quality of the experience.</p>
+    </div>
+</section>
+
+<!-- Registration Form -->
+<section class="register" id="register">
+    <div class="section-inner fade-in">
+        <div class="section-label">Apply for a Stay</div>
+        <h2>Begin Your Journey</h2>
+        <p class="register-intro">Staying at Mukteshwar is by application only. Please share a little about yourself and your intention. We will respond within 7 days.</p>
+
+        <!-- This form would connect to GHL via webhook or embedded GHL form -->
+        <form class="form-grid" id="registrationForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" name="firstName" required placeholder="Your first name">
+            </div>
+            <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" name="lastName" required placeholder="Your last name">
+            </div>
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" name="email" required placeholder="you@email.com">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX">
+            </div>
+            <div class="form-group">
+                <label>Preferred Month *</label>
+                <select name="preferredMonth" required>
+                    <option value="">Select a month...</option>
+                    <option value="2026-04">April 2026</option>
+                    <option value="2026-05">May 2026</option>
+                    <option value="2026-06">June 2026</option>
+                    <option value="2026-07">July 2026</option>
+                    <option value="2026-08">August 2026</option>
+                    <option value="2026-09">September 2026</option>
+                    <option value="2026-10">October 2026</option>
+                    <option value="2026-11">November 2026</option>
+                    <option value="2026-12">December 2026</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" name="country" placeholder="Where are you from?">
+            </div>
+            <div class="form-group full">
+                <label>Your Intention *</label>
+                <textarea name="intention" required placeholder="Why do you wish to stay at Mukteshwar? Share a little about your spiritual journey and what draws you here."></textarea>
+            </div>
+            <div class="form-group full">
+                <label>Meditation Experience</label>
+                <select name="meditationExperience">
+                    <option value="">Select...</option>
+                    <option value="none">No formal practice</option>
+                    <option value="beginner">Beginner (less than 1 year)</option>
+                    <option value="intermediate">Regular practitioner (1-5 years)</option>
+                    <option value="advanced">Dedicated practitioner (5+ years)</option>
+                </select>
+            </div>
+            <div class="form-group full">
+                <label>Dietary Requirements</label>
+                <input type="text" name="dietary" placeholder="Any allergies or requirements? (All meals are vegetarian)">
+            </div>
+            <p class="form-note">By submitting this application, you acknowledge that stays at Mukteshwar involve simple living conditions, vegetarian meals, early mornings, and participation in temple activities. This is not a vacation — it is a commitment to inner exploration.</p>
+            <div class="form-submit">
+                <button type="submit" class="btn">Submit Application</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Location -->
+<section class="location" id="location">
+    <div class="section-inner fade-in">
+        <div class="section-label">Finding Us</div>
+        <h2>How to Reach Mukteshwar</h2>
+        <div class="location-grid">
+            <div class="map-embed">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d84.366575!3d21.561689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a21a5f05a4a5843%3A0xe5e350da5a9c26e4!2sShri%20Shri%20Mukteshwar%2FShiv%20Temple!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="directions">
+                <h3>Getting There</h3>
+                <p>The temple is located in Mukteswar village, Langabahal, Odisha — far from the usual tourist circuits. This remoteness is part of its power.</p>
+                <ul>
+                    <li><strong>Nearest Airport:</strong> Biju Patnaik International, Bhubaneswar (~300 km)</li>
+                    <li><strong>Nearest Railway:</strong> Sambalpur Junction (~80 km)</li>
+                    <li><strong>By Road:</strong> Accessible via NH-55 through Boudh district</li>
+                    <li><strong>Local Transport:</strong> Auto-rickshaws and shared vehicles from Boudh town</li>
+                    <li><strong>PIN Code:</strong> 768107</li>
+                </ul>
+                <p style="margin-top: 1.5rem; font-style: italic; color: var(--stone);">Detailed directions will be shared upon acceptance of your application.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-logo">Shri Shri Mukteshwar Temple</div>
+    <p>Mukteswar, Langabahal, Odisha 768107</p>
+    <div class="footer-om">ॐ</div>
+    <p style="font-size: 0.75rem; opacity: 0.5;">The Lord of Liberation awaits.</p>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Month grid
+    const months = [
+        { name: 'Apr 2026', status: 'available' },
+        { name: 'May 2026', status: 'available' },
+        { name: 'Jun 2026', status: 'limited' },
+        { name: 'Jul 2026', status: 'available' },
+        { name: 'Aug 2026', status: 'available' },
+        { name: 'Sep 2026', status: 'available' },
+        { name: 'Oct 2026', status: 'limited' },
+        { name: 'Nov 2026', status: 'available' },
+        { name: 'Dec 2026', status: 'full' },
+        { name: 'Jan 2027', status: 'available' },
+        { name: 'Feb 2027', status: 'available' },
+        { name: 'Mar 2027', status: 'available' },
+    ];
+
+    const statusText = { available: 'Open', limited: 'Few Spots', full: 'Full' };
+    const grid = document.getElementById('monthGrid');
+    months.forEach(m => {
+        const card = document.createElement('div');
+        card.className = `month-card ${m.status}`;
+        card.innerHTML = `<div class="month-name">${m.name}</div><div class="month-status">${statusText[m.status]}</div>`;
+        if (m.status !== 'full') {
+            card.onclick = () => {
+                document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    const sel = document.querySelector('select[name="preferredMonth"]');
+                    const val = m.name.replace(' ', '-').toLowerCase();
+                    // Try to match option
+                    for (let opt of sel.options) {
+                        if (opt.text.includes(m.name.split(' ')[0])) { sel.value = opt.value; break; }
+                    }
+                }, 500);
+            };
+        }
+        grid.appendChild(card);
+    });
+
+    // Form submission — would POST to GHL webhook
+    function handleSubmit(e) {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target));
+        console.log('Form data (would send to GHL):', data);
+
+        // Replace this URL with your GHL webhook/form endpoint
+        // fetch('https://services.leadconnectorhq.com/hooks/...', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(data)
+        // });
+
+        alert('🙏 Thank you for your application.\n\nWe will review it carefully and respond within 7 days.\n\nNamaskaram.');
+        e.target.reset();
+    }
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+    });
+</script>
+
+</body>
+</html>
