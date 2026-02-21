@@ -115,21 +115,14 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(
-                135deg,
-                var(--earth-dark) 0%,
-                #4A3728 30%,
-                #5C4A3A 60%,
-                var(--stone) 100%
-            );
+            background: url('images/temple-main.jpg') center center / cover no-repeat;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.3" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.5;
+            background: rgba(58, 45, 34, 0.65);
         }
 
         .hero::after {
@@ -771,6 +764,12 @@
         </div>
     </div>
 </section>
+
+<!-- Temple Photo -->
+<div style="max-width: 1000px; margin: 0 auto; padding: 0 2rem;">
+    <img src="images/temple-main.jpg" alt="Shri Shri Mukteshwar Temple, Langabahal, Odisha" style="width: 100%; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.12);">
+    <p style="text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--text-light); margin-top: 1rem; font-size: 1rem;">The temple at Langabahal — over 1,500 years of unbroken devotion</p>
+</div>
 
 <!-- The Stay / Immersion -->
 <section class="immersion" id="immersion">
