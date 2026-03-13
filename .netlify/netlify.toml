@@ -1,0 +1,31 @@
+functionsDirectory = "/tmp/mukteshwar-temple/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+plugins = []
+headers = []
+redirects = []
+
+[build]
+publish = "/tmp/mukteshwar-temple"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "echo 'no build needed'"
+functions = "/tmp/mukteshwar-temple/netlify/functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+node_bundler = "esbuild"

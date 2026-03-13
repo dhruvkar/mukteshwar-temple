@@ -67,12 +67,17 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  // GHL tokens are >5000 chars, split across 2 env vars (Netlify 5000 char limit)
-  const tokenA = process.env.GHL_TOKEN_A || '';
-  const tokenB = process.env.GHL_TOKEN_B || '';
-  const token = tokenA + tokenB;
-  if (!token) {
-    console.error('GHL_TOKEN_A/B not set');
+  // Fetch GHL token from gateway (tokens are >5KB, too large for Lambda env vars)
+  let token;
+  try {
+    const tokenResp = await fetch(process.env.GHL_TOKEN_URL || 'https://k.wints.org/api/ghl-token', {
+      headers: { 'Authorization': `Bearer ${process.env.GHL_TOKEN_KEY || 'muk-token-2026'}` },
+    });
+    if (!tokenResp.ok) throw new Error(`Token fetch failed: ${tokenResp.status}`);
+    const tokenData = await tokenResp.json();
+    token = tokenData.token;
+  } catch (err) {
+    console.error('Token fetch error:', err.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server configuration error' }) };
   }
 
