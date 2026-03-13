@@ -1,1 +1,0 @@
-{"functions":[{"bundler":"esbuild","buildData":{"runtimeAPIVersion":1},"mainFile":"/tmp/mukteshwar-temple/netlify/functions/submit-booking.js","name":"submit-booking","priority":10,"path":"/tmp/mukteshwar-temple/.netlify/functions/submit-booking.zip","runtime":"js"}],"system":{"arch":"x64","platform":"linux"},"timestamp":1773411720905,"version":1}
