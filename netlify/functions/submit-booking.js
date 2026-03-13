@@ -1,20 +1,20 @@
 // Mukteshwar Temple Booking → GHL Contacts + Opportunities
 // Each adult gets a contact + opportunity. Children stored as text on primary guest's opp.
+// Token read from Netlify Blobs (refreshed by scheduled function)
+
+import { getStore } from "@netlify/blobs";
 
 const GHL_API = 'https://services.leadconnectorhq.com';
 const LOCATION_ID = 'zd0Ap2ILf3AkM2ita9RX';
 const PIPELINE_ID = 'P5JDbGjoehBLTgTP9ge5';
 const STAGE_NEW_REQUEST = '86b0364d-2494-4f88-9e15-8cff9c0888d0';
 
-// Custom field IDs
 const CF = {
-  // Contact fields
   gender: 'y216f4IEtdZsQYFw2i4m',
   nationality: 'iy56xAcEjv5YHxFR1osZ',
   ishaPrograms: 'Vk5IngohyTwRKrXncBJs',
   referralSource: 'agTawIG7DXvWBvI36CDU',
   relationship: 'sSjPovxKA1T1lKZY8Xkc',
-  // Opportunity fields
   arrival: 'L66A6SLllDUzKGA4SdQc',
   departure: 'AdNXERkDqaJkWAjbRgvk',
   numAdults: 'MsxVxmHe5epiNlijCeFq',
@@ -52,46 +52,44 @@ function formatChildrenDetails(children) {
   ).join('\n');
 }
 
-exports.handler = async (event) => {
+export default async (req, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 200, headers, body: '' };
+  if (req.method === 'OPTIONS') {
+    return new Response('', { status: 200, headers });
   }
 
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
+  if (req.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers });
   }
 
-  // Fetch GHL token from gateway (tokens are >5KB, too large for Lambda env vars)
+  // Get GHL token from Netlify Blobs
   let token;
   try {
-    const tokenResp = await fetch(process.env.GHL_TOKEN_URL || 'https://k.wints.org/api/ghl-token', {
-      headers: { 'Authorization': `Bearer ${process.env.GHL_TOKEN_KEY || 'muk-token-2026'}` },
-    });
-    if (!tokenResp.ok) throw new Error(`Token fetch failed: ${tokenResp.status}`);
-    const tokenData = await tokenResp.json();
-    token = tokenData.token;
+    const store = getStore("ghl-tokens");
+    const stored = await store.get("mukteshwar", { type: "json" });
+    token = stored?.accessToken;
+    if (!token) throw new Error("No token in store");
   } catch (err) {
-    console.error('Token fetch error:', err.message);
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server configuration error' }) };
+    console.error('Token error:', err.message);
+    return new Response(JSON.stringify({ error: 'Server configuration error' }), { status: 500, headers });
   }
 
   let data;
   try {
-    data = JSON.parse(event.body);
+    data = await req.json();
   } catch {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
+    return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400, headers });
   }
 
   const { arrival, departure, numAdults, numChildren, adults, children, specialNotes } = data;
 
   if (!adults || !adults.length || !arrival || !departure) {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing required fields' }) };
+    return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400, headers });
   }
 
   const bookingRef = generateBookingRef();
@@ -103,7 +101,6 @@ exports.handler = async (event) => {
       const adult = adults[i];
       const isPrimary = i === 0;
 
-      // 1. Create or update contact
       const contactBody = {
         locationId: LOCATION_ID,
         firstName: adult.firstName,
@@ -120,7 +117,6 @@ exports.handler = async (event) => {
         ].filter(f => f.value),
       };
 
-      // Remove undefined fields
       Object.keys(contactBody).forEach(k => contactBody[k] === undefined && delete contactBody[k]);
 
       const contact = await ghl('/contacts/', 'POST', contactBody, token);
@@ -131,7 +127,6 @@ exports.handler = async (event) => {
         continue;
       }
 
-      // 2. Create opportunity
       const oppBody = {
         pipelineId: PIPELINE_ID,
         pipelineStageId: STAGE_NEW_REQUEST,
@@ -149,13 +144,11 @@ exports.handler = async (event) => {
         ],
       };
 
-      // Only add children details + special notes to primary guest's opp
       if (isPrimary) {
         if (childrenText) {
           oppBody.customFields.push({ id: CF.childrenDetails, value: childrenText });
         }
         if (specialNotes) {
-          // Add special notes to opp description/notes
           oppBody.name += ` [Notes: ${specialNotes.substring(0, 100)}]`;
         }
       }
@@ -169,22 +162,20 @@ exports.handler = async (event) => {
       });
     }
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        success: true,
-        bookingRef,
-        message: `Booking request submitted for ${results.length} guest(s). Reference: ${bookingRef}`,
-        guests: results,
-      }),
-    };
+    return new Response(JSON.stringify({
+      success: true,
+      bookingRef,
+      message: `Booking request submitted for ${results.length} guest(s). Reference: ${bookingRef}`,
+      guests: results,
+    }), { status: 200, headers });
   } catch (err) {
     console.error('Booking submission error:', err.message);
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: 'Failed to submit booking. Please try again or contact us directly.' }),
-    };
+    return new Response(JSON.stringify({
+      error: 'Failed to submit booking. Please try again or contact us directly.',
+    }), { status: 500, headers });
   }
+};
+
+export const config = {
+  path: "/.netlify/functions/submit-booking",
 };
