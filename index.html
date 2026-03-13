@@ -473,11 +473,61 @@
             margin-bottom: 2.5rem;
         }
 
+        /* Multi-step form */
+        .booking-steps {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+        }
+        .booking-step-indicator {
+            flex: 1;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .booking-step-indicator.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        .booking-step-indicator.completed {
+            color: var(--sage-light);
+            border-bottom-color: var(--sage-light);
+            cursor: pointer;
+        }
+        .booking-step-indicator .step-num {
+            display: inline-block;
+            width: 24px; height: 24px;
+            line-height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            font-size: 0.7rem;
+            margin-bottom: 0.4rem;
+        }
+        .booking-step-indicator.active .step-num { background: var(--gold); color: var(--earth-dark); }
+        .booking-step-indicator.completed .step-num { background: var(--sage-light); color: white; }
+
+        .form-panel {
+            display: none;
+            max-width: 700px;
+            animation: fadeSlide 0.4s ease;
+        }
+        .form-panel.active { display: block; }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
-            max-width: 700px;
         }
 
         .form-group {
@@ -507,6 +557,7 @@
             font-weight: 300;
             outline: none;
             transition: border-color 0.3s;
+            border-radius: 0;
         }
 
         .form-group input::placeholder,
@@ -521,26 +572,147 @@
         }
 
         .form-group select option { background: var(--earth-dark); color: white; }
-
         .form-group textarea { min-height: 100px; resize: vertical; }
 
-        .form-note {
-            grid-column: 1 / -1;
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: #c0392b;
+        }
+
+        .form-nav {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 700px;
+        }
+        .form-nav .btn { flex: 1; text-align: center; padding: 1rem; font-family: 'Inter', sans-serif; }
+
+        /* Accordion */
+        .guest-accordion {
+            max-width: 700px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.04);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .accordion-header:hover { background: rgba(255,255,255,0.07); }
+        .accordion-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: white;
+            margin: 0;
+        }
+        .accordion-header .arrow {
+            transition: transform 0.3s;
+            color: var(--gold);
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-top: 0.5rem;
+        }
+        .accordion-header.open .arrow { transform: rotate(180deg); }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .accordion-body.open {
+            max-height: 2000px;
+        }
+        .accordion-body-inner {
+            padding: 1.5rem 1.2rem;
         }
 
-        .form-submit {
-            grid-column: 1 / -1;
-            margin-top: 0.5rem;
+        /* Checkbox group */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem !important;
+            letter-spacing: 0 !important;
+            text-transform: none !important;
+            color: rgba(255,255,255,0.7) !important;
+            cursor: pointer;
+            margin-bottom: 0 !important;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 16px; height: 16px;
+            padding: 0;
+            accent-color: var(--gold);
         }
 
-        .form-submit .btn {
-            width: 100%;
-            padding: 1rem;
-            font-family: 'Inter', sans-serif;
+        /* Phone input */
+        .phone-input {
+            display: flex;
+            gap: 0.5rem;
         }
+        .phone-input select {
+            width: 90px;
+            flex-shrink: 0;
+        }
+        .phone-input input { flex: 1; }
+
+        /* Review summary */
+        .review-section {
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        .review-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+        }
+        .review-row .label { color: rgba(255,255,255,0.5); }
+        .review-row .value { color: rgba(255,255,255,0.9); text-align: right; max-width: 60%; }
+
+        .disclaimer-text {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+            padding: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        /* Success/error */
+        .form-message {
+            max-width: 700px;
+            padding: 2rem;
+            text-align: center;
+            display: none;
+        }
+        .form-message.show { display: block; }
+        .form-message h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .form-message p { color: rgba(255,255,255,0.7); }
+
+        .btn.loading { opacity: 0.6; pointer-events: none; }
 
         /* Testimonials */
         .testimonials {
@@ -687,6 +859,10 @@
 
             .stat-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .form-grid { grid-template-columns: 1fr; }
+            .booking-steps { flex-wrap: nowrap; }
+            .booking-step-indicator { font-size: 0.65rem; padding: 0.8rem 0.3rem; }
+            .form-nav { flex-direction: column; }
+            .phone-input { flex-direction: row; }
             .location-grid { grid-template-columns: 1fr; }
             .month-grid { grid-template-columns: repeat(3, 1fr); }
 
@@ -896,68 +1072,87 @@
     <div class="section-inner fade-in">
         <div class="section-label">Apply for a Stay</div>
         <h2>Begin Your Journey</h2>
-        <p class="register-intro">Staying at Mukteshwar is by application only. Please share a little about yourself and your intention. We will respond within 7 days.</p>
+        <p class="register-intro">Plan your stay at Mukteshwar. Fill in your details below and we will confirm your booking within 48 hours.</p>
 
-        <!-- This form would connect to GHL via webhook or embedded GHL form -->
-        <form class="form-grid" id="registrationForm" onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label>First Name *</label>
-                <input type="text" name="firstName" required placeholder="Your first name">
+        <!-- Step indicators -->
+        <div class="booking-steps" id="bookingSteps">
+            <div class="booking-step-indicator active" data-step="1">
+                <div class="step-num">1</div><br>Stay Details
             </div>
-            <div class="form-group">
-                <label>Last Name *</label>
-                <input type="text" name="lastName" required placeholder="Your last name">
+            <div class="booking-step-indicator" data-step="2">
+                <div class="step-num">2</div><br>Guest Details
             </div>
-            <div class="form-group">
-                <label>Email *</label>
-                <input type="email" name="email" required placeholder="you@email.com">
+            <div class="booking-step-indicator" data-step="3">
+                <div class="step-num">3</div><br>Review & Submit
             </div>
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX">
+        </div>
+
+        <!-- STEP 1: Stay Details -->
+        <div class="form-panel active" id="step1">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Date of Arrival *</label>
+                    <select id="arrivalDate" required><option value="">Select arrival date...</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Date of Departure *</label>
+                    <select id="departureDate" required disabled><option value="">Select arrival first...</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Adults *</label>
+                    <select id="numAdults">
+                        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                        <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Children (≤10 years)</label>
+                    <select id="numChildren">
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Preferred Month *</label>
-                <select name="preferredMonth" required>
-                    <option value="">Select a month...</option>
-                    <option value="2026-04">April 2026</option>
-                    <option value="2026-05">May 2026</option>
-                    <option value="2026-06">June 2026</option>
-                    <option value="2026-07">July 2026</option>
-                    <option value="2026-08">August 2026</option>
-                    <option value="2026-09">September 2026</option>
-                    <option value="2026-10">October 2026</option>
-                    <option value="2026-11">November 2026</option>
-                    <option value="2026-12">December 2026</option>
-                </select>
+            <div class="form-nav">
+                <button class="btn" onclick="goToStep(2)">Continue to Guest Details →</button>
             </div>
-            <div class="form-group">
-                <label>Country</label>
-                <input type="text" name="country" placeholder="Where are you from?">
+        </div>
+
+        <!-- STEP 2: Guest Details -->
+        <div class="form-panel" id="step2">
+            <div id="guestAccordions"></div>
+            <div class="form-nav">
+                <button class="btn" onclick="goToStep(1)">← Back</button>
+                <button class="btn" onclick="goToStep(3)">Review & Submit →</button>
             </div>
-            <div class="form-group full">
-                <label>Your Intention *</label>
-                <textarea name="intention" required placeholder="Why do you wish to stay at Mukteshwar? Share a little about your spiritual journey and what draws you here."></textarea>
+        </div>
+
+        <!-- STEP 3: Review & Submit -->
+        <div class="form-panel" id="step3">
+            <div id="reviewContent"></div>
+            <div class="form-group full" style="max-width:700px;margin-bottom:1.5rem;">
+                <label>Notes / Special Requests</label>
+                <textarea id="specialNotes" placeholder="Any special requests, dietary needs, or other information..."></textarea>
             </div>
-            <div class="form-group full">
-                <label>Meditation Experience</label>
-                <select name="meditationExperience">
-                    <option value="">Select...</option>
-                    <option value="none">No formal practice</option>
-                    <option value="beginner">Beginner (less than 1 year)</option>
-                    <option value="intermediate">Regular practitioner (1-5 years)</option>
-                    <option value="advanced">Dedicated practitioner (5+ years)</option>
-                </select>
+            <div class="disclaimer-text">By submitting, you acknowledge that stays involve simple living, vegetarian meals, early mornings, and participation in temple activities.</div>
+            <div class="form-nav">
+                <button class="btn" onclick="goToStep(2)">← Back</button>
+                <button class="btn btn-solid" id="submitBtn" onclick="submitBooking()">Submit Booking</button>
             </div>
-            <div class="form-group full">
-                <label>Dietary Requirements</label>
-                <input type="text" name="dietary" placeholder="Any allergies or requirements? (All meals are vegetarian)">
-            </div>
-            <p class="form-note">By submitting this application, you acknowledge that stays at Mukteshwar involve simple living conditions, vegetarian meals, early mornings, and participation in temple activities. This is not a vacation — it is a commitment to inner exploration.</p>
-            <div class="form-submit">
-                <button type="submit" class="btn">Submit Application</button>
-            </div>
-        </form>
+        </div>
+
+        <!-- Success/Error messages -->
+        <div class="form-message" id="successMsg">
+            <h3>🙏 Booking Received</h3>
+            <p>Thank you! We will confirm your stay within 48 hours.<br>Namaskaram.</p>
+        </div>
+        <div class="form-message" id="errorMsg">
+            <h3>Something went wrong</h3>
+            <p>Please try again or contact us directly.</p>
+            <button class="btn" style="margin-top:1rem" onclick="document.getElementById('errorMsg').classList.remove('show');document.getElementById('step3').classList.add('active');">Try Again</button>
+        </div>
     </div>
 </section>
 
@@ -1031,34 +1226,377 @@
         if (m.status !== 'full') {
             card.onclick = () => {
                 document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                    const sel = document.querySelector('select[name="preferredMonth"]');
-                    const val = m.name.replace(' ', '-').toLowerCase();
-                    // Try to match option
-                    for (let opt of sel.options) {
-                        if (opt.text.includes(m.name.split(' ')[0])) { sel.value = opt.value; break; }
-                    }
-                }, 500);
             };
         }
         grid.appendChild(card);
     });
 
-    // Form submission — would POST to GHL webhook
-    function handleSubmit(e) {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target));
-        console.log('Form data (would send to GHL):', data);
+    // === BOOKING FORM ===
+    const BATCHES = [
+        { month:'April', year:2026, batches:[[23,24,25,26],[27,28,29,30]] },
+        { month:'May', year:2026, batches:[[22,23,24,25],[28,29,30,31]] },
+        { month:'June', year:2026, batches:[[19,20,21,22],[24,25,26,27]] },
+        { month:'July', year:2026, batches:[[24,25,26,27]] },
+        { month:'July-August', year:2026, batches:[], cross:[{m1:'July',d1:[30,31],m2:'August',d2:[1,2],year:2026}] },
+        { month:'August', year:2026, batches:[[21,22,23,24],[28,29,30,31]] },
+        { month:'September', year:2026, batches:[[18,19,20,21]] },
+        { month:'October', year:2026, batches:[[3,4,5,6],[23,24,25,26]] },
+        { month:'November', year:2026, batches:[[20,21,22,23],[27,28,29,30]] },
+        { month:'December', year:2026, batches:[[20,21,22,23],[27,28,29,30]] },
+    ];
 
-        // Replace this URL with your GHL webhook/form endpoint
-        // fetch('https://services.leadconnectorhq.com/hooks/...', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        // });
+    const MONTH_MAP = {January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,November:10,December:11};
+    const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-        alert('🙏 Thank you for your application.\n\nWe will review it carefully and respond within 7 days.\n\nNamaskaram.');
-        e.target.reset();
+    function fmtDate(y,m,d) {
+        const dt = new Date(y, MONTH_MAP[m], d);
+        return `${MONTHS_SHORT[dt.getMonth()]} ${String(d).padStart(2,'0')}, ${y} (${DAYS[dt.getDay()]})`;
+    }
+    function dateKey(y,m,d) { return `${y}-${String(MONTH_MAP[m]+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+
+    // Build all batches as flat array of {arrival[], departure[], label, dates[{y,m,d}]}
+    const allBatches = [];
+    BATCHES.forEach(b => {
+        if (b.batches) {
+            b.batches.forEach((days, i) => {
+                const label = `${b.month} ${b.year} — Batch ${i+1}`;
+                const arrival = days.slice(0, -1).map(d => ({y:b.year, m:b.month, d, key:dateKey(b.year,b.month,d), fmt:fmtDate(b.year,b.month,d)}));
+                const departure = days.slice(1).map(d => ({y:b.year, m:b.month, d, key:dateKey(b.year,b.month,d), fmt:fmtDate(b.year,b.month,d)}));
+                allBatches.push({label, arrival, departure, allDays:days.map(d=>({y:b.year,m:b.month,d}))});
+            });
+        }
+        if (b.cross) {
+            b.cross.forEach(c => {
+                const label = `Jul-Aug ${c.year} — Batch`;
+                const allDays = [...c.d1.map(d=>({y:c.year,m:c.m1,d})), ...c.d2.map(d=>({y:c.year,m:c.m2,d}))];
+                const arrival = allDays.slice(0,-1).map(o=>({...o, key:dateKey(o.y,o.m,o.d), fmt:fmtDate(o.y,o.m,o.d)}));
+                const departure = allDays.slice(1).map(o=>({...o, key:dateKey(o.y,o.m,o.d), fmt:fmtDate(o.y,o.m,o.d)}));
+                allBatches.push({label, arrival, departure, allDays});
+            });
+        }
+    });
+
+    // Populate arrival dropdown grouped by batch
+    const arrSel = document.getElementById('arrivalDate');
+    const depSel = document.getElementById('departureDate');
+    let currentOptGroup = null;
+    allBatches.forEach((batch, bi) => {
+        const og = document.createElement('optgroup');
+        og.label = batch.label;
+        batch.arrival.forEach(a => {
+            const opt = document.createElement('option');
+            opt.value = `${bi}|${a.key}`;
+            opt.textContent = a.fmt;
+            og.appendChild(opt);
+        });
+        arrSel.appendChild(og);
+    });
+
+    arrSel.addEventListener('change', () => {
+        depSel.innerHTML = '<option value="">Select departure date...</option>';
+        depSel.disabled = true;
+        if (!arrSel.value) return;
+        const [bi, arrKey] = arrSel.value.split('|');
+        const batch = allBatches[parseInt(bi)];
+        const arrIdx = batch.arrival.findIndex(a => a.key === arrKey);
+        // departure must be after arrival and within same batch
+        const validDeps = batch.departure.filter(d => d.key > arrKey);
+        if (validDeps.length === 0) {
+            // last arrival date — only one departure possible (last day)
+            const lastDep = batch.departure[batch.departure.length - 1];
+            if (lastDep && lastDep.key > arrKey) validDeps.push(lastDep);
+        }
+        const filtered = batch.departure.filter(d => d.key > arrKey);
+        filtered.forEach(d => {
+            const opt = document.createElement('option');
+            opt.value = d.key;
+            opt.textContent = d.fmt;
+            depSel.appendChild(opt);
+        });
+        depSel.disabled = filtered.length === 0;
+        if (filtered.length === 1) depSel.value = filtered[0].key;
+    });
+
+    // Country codes and nationality lists
+    const COUNTRY_CODES = ['+91 India','+1 USA','+44 UK','+971 UAE','+61 Australia','+65 Singapore','+49 Germany','+33 France','+81 Japan','+86 China','+7 Russia','+27 South Africa','+55 Brazil','+52 Mexico','+82 South Korea','+39 Italy','+34 Spain','+31 Netherlands','+46 Sweden','+41 Switzerland','+64 New Zealand','+60 Malaysia','+66 Thailand','+62 Indonesia','+63 Philippines','+94 Sri Lanka','+977 Nepal','+880 Bangladesh','+92 Pakistan','+254 Kenya'];
+    const NATIONALITIES = ['Indian','American','British','Emirati','Australian','Singaporean','German','French','Japanese','Chinese','Russian','South African','Brazilian','Mexican','South Korean','Italian','Spanish','Dutch','Swedish','Swiss','New Zealander','Malaysian','Thai','Indonesian','Filipino','Sri Lankan','Nepali','Bangladeshi','Pakistani','Kenyan','Canadian','Other'];
+    const ISHA_PROGRAMS = ['Isha Kriya','Hatha Yoga','Inner Engineering','Shoonya','BSP','Samyama','None'];
+    const REFERRAL_SOURCES = ['Isha Volunteer','Kannapanana','Found Website','Other'];
+    const RELATIONSHIPS = ['Spouse','Family','Friend','Other'];
+    const CHILD_RELATIONSHIPS = ['Son/Daughter','Niece/Nephew','Family Friend','Other'];
+
+    function buildGuestField(id, labelText, type, options) {
+        const g = document.createElement('div');
+        g.className = 'form-group';
+        g.innerHTML = `<label>${labelText}</label>`;
+        if (type === 'select') {
+            const sel = document.createElement('select');
+            sel.id = id; sel.name = id;
+            sel.innerHTML = '<option value="">Select...</option>' + options.map(o => `<option value="${o}">${o}</option>`).join('');
+            g.appendChild(sel);
+        } else if (type === 'checkboxes') {
+            const cg = document.createElement('div');
+            cg.className = 'checkbox-group';
+            options.forEach(o => {
+                cg.innerHTML += `<label><input type="checkbox" name="${id}" value="${o}"> ${o}</label>`;
+            });
+            g.appendChild(cg);
+            g.className = 'form-group full';
+        } else if (type === 'phone') {
+            const ph = document.createElement('div');
+            ph.className = 'phone-input';
+            ph.innerHTML = `<select id="${id}_code" name="${id}_code">${COUNTRY_CODES.map((c,i) => `<option value="${c.split(' ')[0]}" ${i===0?'selected':''}>${c}</option>`).join('')}</select><input type="tel" id="${id}" name="${id}" placeholder="XXXXX XXXXX">`;
+            g.appendChild(ph);
+        } else {
+            g.innerHTML += `<input type="${type}" id="${id}" name="${id}" placeholder="${type==='date'?'':''}">`;
+        }
+        return g;
+    }
+
+    function buildGuestAccordion(type, index, total) {
+        const isAdult = type === 'adult';
+        const isPrimary = isAdult && index === 0;
+        const label = isPrimary ? 'Adult 1 — Primary Guest' : (isAdult ? `Adult ${index+1}` : `Child ${index+1}`);
+        const prefix = `${type}${index}`;
+
+        const acc = document.createElement('div');
+        acc.className = 'guest-accordion';
+
+        const header = document.createElement('div');
+        header.className = 'accordion-header' + (isPrimary ? ' open' : '');
+        header.innerHTML = `<h3>${label}</h3><span class="arrow">▼</span>`;
+
+        const body = document.createElement('div');
+        body.className = 'accordion-body' + (isPrimary ? ' open' : '');
+
+        const inner = document.createElement('div');
+        inner.className = 'accordion-body-inner';
+        const grid = document.createElement('div');
+        grid.className = 'form-grid';
+
+        grid.appendChild(buildGuestField(`${prefix}_firstName`, 'First Name *', 'text'));
+        grid.appendChild(buildGuestField(`${prefix}_lastName`, 'Last Name *', 'text'));
+        grid.appendChild(buildGuestField(`${prefix}_gender`, 'Gender *', 'select', ['Male','Female','Other']));
+        grid.appendChild(buildGuestField(`${prefix}_dob`, 'Date of Birth *', 'date'));
+
+        if (isAdult) {
+            grid.appendChild(buildGuestField(`${prefix}_email`, 'Email', 'email'));
+            const phoneG = buildGuestField(`${prefix}_mobile`, 'Mobile *', 'phone');
+            grid.appendChild(phoneG);
+            grid.appendChild(buildGuestField(`${prefix}_nationality`, 'Nationality *', 'select', NATIONALITIES));
+            grid.appendChild(buildGuestField(`${prefix}_referral`, 'Referral Source *', 'select', REFERRAL_SOURCES));
+            const pg = buildGuestField(`${prefix}_programs`, 'Isha Programs Attended', 'checkboxes', ISHA_PROGRAMS);
+            grid.appendChild(pg);
+            if (!isPrimary) {
+                grid.appendChild(buildGuestField(`${prefix}_relationship`, 'Relationship to Primary Guest *', 'select', RELATIONSHIPS));
+            }
+        } else {
+            grid.appendChild(buildGuestField(`${prefix}_childRelationship`, 'Relationship to Accompanying Adult *', 'select', CHILD_RELATIONSHIPS));
+        }
+
+        inner.appendChild(grid);
+        body.appendChild(inner);
+        acc.appendChild(header);
+        acc.appendChild(body);
+
+        header.addEventListener('click', () => {
+            header.classList.toggle('open');
+            body.classList.toggle('open');
+        });
+
+        return acc;
+    }
+
+    function buildGuestForms() {
+        const container = document.getElementById('guestAccordions');
+        container.innerHTML = '';
+        const nA = parseInt(document.getElementById('numAdults').value);
+        const nC = parseInt(document.getElementById('numChildren').value);
+        for (let i = 0; i < nA; i++) container.appendChild(buildGuestAccordion('adult', i, nA));
+        for (let i = 0; i < nC; i++) container.appendChild(buildGuestAccordion('child', i, nC));
+    }
+
+    // Step navigation
+    let currentStep = 1;
+    function goToStep(step) {
+        // Validate before moving forward
+        if (step > currentStep) {
+            if (currentStep === 1 && !validateStep1()) return;
+            if (currentStep === 2 && !validateStep2()) return;
+        }
+        if (step === 2) buildGuestForms();
+        if (step === 3) buildReview();
+
+        document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        document.querySelectorAll('.booking-step-indicator').forEach(ind => {
+            const s = parseInt(ind.dataset.step);
+            ind.classList.remove('active', 'completed');
+            if (s === step) ind.classList.add('active');
+            else if (s < step) ind.classList.add('completed');
+        });
+
+        // Allow clicking completed steps
+        document.querySelectorAll('.booking-step-indicator.completed').forEach(ind => {
+            ind.onclick = () => goToStep(parseInt(ind.dataset.step));
+        });
+
+        currentStep = step;
+        document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateStep1() {
+        let valid = true;
+        ['arrivalDate','departureDate'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el.value) { el.classList.add('invalid'); valid = false; }
+            else el.classList.remove('invalid');
+        });
+        return valid;
+    }
+
+    function validateStep2() {
+        let valid = true;
+        const nA = parseInt(document.getElementById('numAdults').value);
+        const nC = parseInt(document.getElementById('numChildren').value);
+
+        for (let i = 0; i < nA; i++) {
+            const p = `adult${i}`;
+            const required = [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob`,`${p}_mobile`,`${p}_nationality`,`${p}_referral`];
+            if (i > 0) required.push(`${p}_relationship`);
+            required.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && !el.value) { el.classList.add('invalid'); valid = false; }
+                else if (el) el.classList.remove('invalid');
+            });
+        }
+        for (let i = 0; i < nC; i++) {
+            const p = `child${i}`;
+            [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob`,`${p}_childRelationship`].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && !el.value) { el.classList.add('invalid'); valid = false; }
+                else if (el) el.classList.remove('invalid');
+            });
+        }
+        if (!valid) {
+            // Open first accordion with invalid field
+            const firstInvalid = document.querySelector('.form-group input.invalid, .form-group select.invalid');
+            if (firstInvalid) {
+                const acc = firstInvalid.closest('.guest-accordion');
+                if (acc) {
+                    acc.querySelector('.accordion-header').classList.add('open');
+                    acc.querySelector('.accordion-body').classList.add('open');
+                    firstInvalid.focus();
+                }
+            }
+        }
+        return valid;
+    }
+
+    function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+
+    function buildReview() {
+        const rc = document.getElementById('reviewContent');
+        let html = '<div class="review-section"><h3>Stay Details</h3>';
+        const arrOpt = arrSel.options[arrSel.selectedIndex];
+        const depOpt = depSel.options[depSel.selectedIndex];
+        html += `<div class="review-row"><span class="label">Arrival</span><span class="value">${arrOpt?arrOpt.textContent:''}</span></div>`;
+        html += `<div class="review-row"><span class="label">Departure</span><span class="value">${depOpt?depOpt.textContent:''}</span></div>`;
+        html += `<div class="review-row"><span class="label">Adults</span><span class="value">${gv('numAdults')}</span></div>`;
+        html += `<div class="review-row"><span class="label">Children</span><span class="value">${gv('numChildren')}</span></div>`;
+        html += '</div>';
+
+        const nA = parseInt(gv('numAdults'));
+        const nC = parseInt(gv('numChildren'));
+        for (let i = 0; i < nA; i++) {
+            const p = `adult${i}`;
+            html += `<div class="review-section"><h3>${i===0?'Primary Guest':'Adult '+(i+1)}</h3>`;
+            html += `<div class="review-row"><span class="label">Name</span><span class="value">${gv(p+'_firstName')} ${gv(p+'_lastName')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Gender</span><span class="value">${gv(p+'_gender')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${gv(p+'_dob')}</span></div>`;
+            if (gv(p+'_email')) html += `<div class="review-row"><span class="label">Email</span><span class="value">${gv(p+'_email')}</span></div>`;
+            const code = document.getElementById(p+'_mobile_code');
+            html += `<div class="review-row"><span class="label">Mobile</span><span class="value">${code?code.value:''} ${gv(p+'_mobile')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Nationality</span><span class="value">${gv(p+'_nationality')}</span></div>`;
+            const progs = [...document.querySelectorAll(`input[name="${p}_programs"]:checked`)].map(c=>c.value).join(', ');
+            if (progs) html += `<div class="review-row"><span class="label">Isha Programs</span><span class="value">${progs}</span></div>`;
+            html += `<div class="review-row"><span class="label">Referral</span><span class="value">${gv(p+'_referral')}</span></div>`;
+            if (i>0) html += `<div class="review-row"><span class="label">Relationship</span><span class="value">${gv(p+'_relationship')}</span></div>`;
+            html += '</div>';
+        }
+        for (let i = 0; i < nC; i++) {
+            const p = `child${i}`;
+            html += `<div class="review-section"><h3>Child ${i+1}</h3>`;
+            html += `<div class="review-row"><span class="label">Name</span><span class="value">${gv(p+'_firstName')} ${gv(p+'_lastName')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Gender</span><span class="value">${gv(p+'_gender')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${gv(p+'_dob')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Relationship</span><span class="value">${gv(p+'_childRelationship')}</span></div>`;
+            html += '</div>';
+        }
+        rc.innerHTML = html;
+    }
+
+    function collectFormData() {
+        const nA = parseInt(gv('numAdults'));
+        const nC = parseInt(gv('numChildren'));
+        const data = {
+            arrival: arrSel.value.split('|')[1],
+            departure: depSel.value,
+            numAdults: nA,
+            numChildren: nC,
+            specialNotes: gv('specialNotes'),
+            adults: [],
+            children: []
+        };
+        for (let i = 0; i < nA; i++) {
+            const p = `adult${i}`;
+            const code = document.getElementById(p+'_mobile_code');
+            data.adults.push({
+                firstName: gv(p+'_firstName'), lastName: gv(p+'_lastName'),
+                gender: gv(p+'_gender'), dob: gv(p+'_dob'),
+                email: gv(p+'_email'), mobile: (code?code.value:'') + gv(p+'_mobile'),
+                nationality: gv(p+'_nationality'),
+                programs: [...document.querySelectorAll(`input[name="${p}_programs"]:checked`)].map(c=>c.value),
+                referral: gv(p+'_referral'),
+                relationship: i > 0 ? gv(p+'_relationship') : 'Primary'
+            });
+        }
+        for (let i = 0; i < nC; i++) {
+            const p = `child${i}`;
+            data.children.push({
+                firstName: gv(p+'_firstName'), lastName: gv(p+'_lastName'),
+                gender: gv(p+'_gender'), dob: gv(p+'_dob'),
+                relationship: gv(p+'_childRelationship')
+            });
+        }
+        return data;
+    }
+
+    async function submitBooking() {
+        const btn = document.getElementById('submitBtn');
+        btn.classList.add('loading');
+        btn.textContent = 'Submitting...';
+
+        try {
+            const resp = await fetch('/.netlify/functions/submit-booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(collectFormData())
+            });
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+            if (resp.ok) {
+                document.getElementById('successMsg').classList.add('show');
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (e) {
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('errorMsg').classList.add('show');
+        } finally {
+            btn.classList.remove('loading');
+            btn.textContent = 'Submit Booking';
+        }
     }
 
     // Close mobile menu on link click
