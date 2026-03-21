@@ -10,7 +10,7 @@ export default async (req) => {
   }
 
   const auth = req.headers.get('authorization');
-  if (auth !== `Bearer ${process.env.SEED_SECRET || 'muk-seed-2026'}`) {
+  if (!process.env.SEED_SECRET || auth !== `Bearer ${process.env.SEED_SECRET}`) {
     return new Response('unauthorized', { status: 401 });
   }
 
