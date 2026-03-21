@@ -836,7 +836,8 @@ h3 {
 /* Success/error messages */
 .form-message {
     max-width: 700px;
-    padding: 2rem;
+    margin: 0 auto;
+    padding: 4rem 2rem;
     text-align: center;
     display: none;
 }

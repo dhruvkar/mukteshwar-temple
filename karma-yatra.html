@@ -193,24 +193,6 @@
     </div>
 </section>
 
-<!-- Availability -->
-<section class="availability" id="availability">
-    <div class="section-inner fade-in">
-        <div class="section-label">Availability</div>
-        <h2>Choose Your Month</h2>
-        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Each month, we welcome a limited number of seekers to ensure the sanctity and intimacy of the experience. Select a month below to begin your application.</p>
-        <div class="legend">
-            <div class="legend-item"><div class="legend-dot available"></div> Available</div>
-            <div class="legend-item"><div class="legend-dot limited"></div> Few Spots Left</div>
-            <div class="legend-item"><div class="legend-dot full"></div> Full</div>
-        </div>
-        <div class="month-grid" id="monthGrid">
-            <!-- Populated by JS -->
-        </div>
-        <p style="color: var(--text-light); font-size: 0.85rem;">Availability updates regularly. Apply early — spaces are limited to preserve the quality of the experience.</p>
-    </div>
-</section>
-
 <!-- Booking Form -->
 <section class="register" id="register">
     <div class="section-inner fade-in">
@@ -311,36 +293,6 @@
 <script src="js/main.js"></script>
 <script>
     setCurrentPage('karma yatra');
-
-    // Month grid
-    const months = [
-        { name: 'Apr 2026', status: 'available' },
-        { name: 'May 2026', status: 'available' },
-        { name: 'Jun 2026', status: 'limited' },
-        { name: 'Jul 2026', status: 'available' },
-        { name: 'Aug 2026', status: 'available' },
-        { name: 'Sep 2026', status: 'available' },
-        { name: 'Oct 2026', status: 'limited' },
-        { name: 'Nov 2026', status: 'available' },
-        { name: 'Dec 2026', status: 'full' },
-        { name: 'Jan 2027', status: 'available' },
-        { name: 'Feb 2027', status: 'available' },
-        { name: 'Mar 2027', status: 'available' },
-    ];
-
-    const statusText = { available: 'Open', limited: 'Few Spots', full: 'Full' };
-    const grid = document.getElementById('monthGrid');
-    months.forEach(m => {
-        const card = document.createElement('div');
-        card.className = `month-card ${m.status}`;
-        card.innerHTML = `<div class="month-name">${m.name}</div><div class="month-status">${statusText[m.status]}</div>`;
-        if (m.status !== 'full') {
-            card.onclick = () => {
-                document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
-            };
-        }
-        grid.appendChild(card);
-    });
 
     // === BOOKING FORM ===
     const BATCHES = [
