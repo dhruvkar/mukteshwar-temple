@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Shri Shri Mukteshwar Temple</title>
+    <meta name="description" content="Photo gallery of Mukteshwar Temple showcasing the sacred architecture, natural beauty, and spiritual atmosphere of this ancient temple.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="logo">Mukteshwar</a>
+        <button class="menu-toggle" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="karma-yatra.html">Karma Yatra</a></li>
+            <li><a href="visit.html">Visit</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero page-hero">
+    <div class="hero-content">
+        <div class="om">ॐ</div>
+        <h1>Photo Gallery</h1>
+        <div class="subtitle">Sacred Glimpses</div>
+        <p>Visual journey through the timeless beauty of Mukteshwar Temple and its sacred surroundings.</p>
+    </div>
+</section>
+
+<!-- Gallery Filters -->
+<section style="background: var(--cream-light); padding: 4rem 2rem 2rem;">
+    <div class="section-inner fade-in">
+        <div class="section-label">Browse Collection</div>
+        <h2>Filter by Category</h2>
+        <div class="gallery-filters">
+            <button class="gallery-filter active" data-filter="all">All</button>
+            <button class="gallery-filter" data-filter="temple">Temple</button>
+            <button class="gallery-filter" data-filter="nature">Nature</button>
+            <button class="gallery-filter" data-filter="rituals">Rituals</button>
+            <button class="gallery-filter" data-filter="community">Community</button>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section style="background: var(--cream-light); padding: 0 2rem 6rem;">
+    <div class="section-inner wide fade-in">
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Current Temple Images -->
+            <div class="gallery-item" data-category="temple">
+                <img src="images/temple-main.jpg" alt="Shri Shri Mukteshwar Temple main structure">
+            </div>
+            <div class="gallery-item" data-category="temple">
+                <img src="images/temple-video1.jpg" alt="Temple architecture detail">
+            </div>
+            <div class="gallery-item" data-category="temple">
+                <img src="images/temple-video2.jpg" alt="Temple from different angle">
+            </div>
+
+            <!-- Placeholder items for future photos -->
+            <div class="gallery-item" data-category="nature">
+                <p style="margin: 0;">Photo coming soon<br><small>Sacred Lake</small></p>
+            </div>
+            <div class="gallery-item" data-category="nature">
+                <p style="margin: 0;">Photo coming soon<br><small>Ancient Arjun Tree</small></p>
+            </div>
+            <div class="gallery-item" data-category="temple">
+                <p style="margin: 0;">Photo coming soon<br><small>Temple Interior</small></p>
+            </div>
+            <div class="gallery-item" data-category="rituals">
+                <p style="margin: 0;">Photo coming soon<br><small>Morning Puja</small></p>
+            </div>
+            <div class="gallery-item" data-category="rituals">
+                <p style="margin: 0;">Photo coming soon<br><small>Evening Aarti</small></p>
+            </div>
+            <div class="gallery-item" data-category="nature">
+                <p style="margin: 0;">Photo coming soon<br><small>Surrounding Landscape</small></p>
+            </div>
+            <div class="gallery-item" data-category="community">
+                <p style="margin: 0;">Photo coming soon<br><small>Community Gathering</small></p>
+            </div>
+            <div class="gallery-item" data-category="temple">
+                <p style="margin: 0;">Photo coming soon<br><small>Temple at Sunset</small></p>
+            </div>
+            <div class="gallery-item" data-category="nature">
+                <p style="margin: 0;">Photo coming soon<br><small>Monsoon Beauty</small></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Info -->
+<section class="about">
+    <div class="section-inner fade-in">
+        <div class="section-label">About the Collection</div>
+        <h2>Capturing the Sacred</h2>
+        <div class="about-text">
+            <p>This gallery offers glimpses into the timeless beauty of Mukteshwar Temple and its surroundings. Each image is captured with reverence for the sacred nature of this space, seeking to convey not just the visual beauty but something of the profound stillness that pervades this ancient site.</p>
+            <p>The collection is continuously growing as visitors and devotees contribute photographs that capture the temple's many moods — from the golden light of dawn puja to the deep silence of midnight meditation, from the lush monsoon greenery to the crisp clarity of winter mornings.</p>
+            <p>Photography at the temple is welcomed when done with respect and mindfulness. Visitors are encouraged to share their images with the temple community, helping to build this visual testament to the enduring beauty of this sacred space.</p>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: var(--cream); border-left: 4px solid var(--gold);">
+            <h3 style="color: var(--earth); margin-bottom: 1rem;">📸 Photography Guidelines</h3>
+            <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                <li style="padding: 0.5rem 0;">• Maintain silence during puja and meditation times</li>
+                <li style="padding: 0.5rem 0;">• Avoid flash photography in the temple interior</li>
+                <li style="padding: 0.5rem 0;">• Respect other visitors' need for quiet contemplation</li>
+                <li style="padding: 0.5rem 0;">• Ask permission before photographing people or ceremonies</li>
+                <li style="padding: 0.5rem 0;">• Share your best images with the temple community</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img src="" alt="" id="lightboxImage">
+        <button class="lightbox-nav prev" onclick="prevImage()">‹</button>
+        <button class="lightbox-nav next" onclick="nextImage()">›</button>
+    </div>
+</div>
+
+<!-- Contributing -->
+<section class="immersion" id="contribute">
+    <div class="section-inner fade-in">
+        <div class="section-label">Share Your Vision</div>
+        <h2>Contribute to the Gallery</h2>
+        <p class="immersion-intro" style="color: rgba(255,255,255,0.8);">If you have photographs of Mukteshwar Temple that capture its spiritual essence, we invite you to share them with our community. Your images help others connect with this sacred space and may inspire future visitors to make their own journey here.</p>
+        
+        <div class="feature-grid" style="margin-top: 3rem;">
+            <div class="feature-card">
+                <div class="icon">📧</div>
+                <h3>Submit Photos</h3>
+                <p style="color: rgba(255,255,255,0.6);">Email high-resolution images along with brief descriptions and photo credits for consideration.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎨</div>
+                <h3>Quality Standards</h3>
+                <p style="color: rgba(255,255,255,0.6);">We seek images that convey the temple's spiritual atmosphere — technically good photos that serve the sacred mission.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">✅</div>
+                <h3>Usage Rights</h3>
+                <p style="color: rgba(255,255,255,0.6);">Contributors retain copyright while granting temple usage rights for educational and promotional purposes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🙏</div>
+                <h3>Recognition</h3>
+                <p style="color: rgba(255,255,255,0.6);">Photographers receive credit for their contributions and become part of the temple's visual legacy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="background: var(--cream); padding: 6rem 2rem; text-align: center;">
+    <div class="section-inner">
+        <h2 style="margin-bottom: 1rem;">Experience the Beauty in Person</h2>
+        <p style="color: var(--text-light); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">While photos capture glimpses of Mukteshwar's beauty, nothing compares to experiencing this sacred space directly. Come and create your own visual memories.</p>
+        <a href="karma-yatra.html" class="btn" style="margin-right: 1rem;">Plan Your Stay</a>
+        <a href="visit.html" class="btn btn-solid">Getting Here</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-logo">Shri Shri Mukteshwar Temple</div>
+    <p>Mukteswar, Langabahal, Odisha 768107</p>
+    <div class="footer-om">ॐ</div>
+    <p style="font-size: 0.75rem; opacity: 0.5;">The Lord of Liberation awaits.</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    setCurrentPage('gallery');
+
+    // Gallery functionality
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    // Initialize gallery
+    function initializeGallery() {
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        galleryImages = Array.from(galleryItems);
+        
+        // Add click handlers to images
+        galleryItems.forEach((img, index) => {
+            img.parentElement.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+    }
+
+    // Filter functionality
+    function initializeFilters() {
+        const filters = document.querySelectorAll('.gallery-filter');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                // Update active filter
+                filters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                
+                const filterValue = filter.getAttribute('data-filter');
+                
+                // Show/hide gallery items
+                galleryItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (filterValue === 'all' || itemCategory === filterValue) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Update gallery images array for lightbox
+                if (filterValue === 'all') {
+                    galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+                } else {
+                    galleryImages = Array.from(document.querySelectorAll(`.gallery-item[data-category="${filterValue}"] img`));
+                }
+            });
+        });
+    }
+
+    // Lightbox functions
+    function openLightbox(imageIndex) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        
+        if (galleryImages[imageIndex]) {
+            currentImageIndex = imageIndex;
+            lightboxImage.src = galleryImages[imageIndex].src;
+            lightboxImage.alt = galleryImages[imageIndex].alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function prevImage() {
+        currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : galleryImages.length - 1;
+        const lightboxImage = document.getElementById('lightboxImage');
+        lightboxImage.src = galleryImages[currentImageIndex].src;
+        lightboxImage.alt = galleryImages[currentImageIndex].alt;
+    }
+
+    function nextImage() {
+        currentImageIndex = currentImageIndex < galleryImages.length - 1 ? currentImageIndex + 1 : 0;
+        const lightboxImage = document.getElementById('lightboxImage');
+        lightboxImage.src = galleryImages[currentImageIndex].src;
+        lightboxImage.alt = galleryImages[currentImageIndex].alt;
+    }
+
+    // Close lightbox when clicking outside image
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox') {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox.classList.contains('active')) return;
+        
+        switch (e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    });
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeGallery();
+        initializeFilters();
+    });
+</script>
+
+</body>
+</html>
