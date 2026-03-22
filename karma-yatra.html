@@ -346,6 +346,19 @@
             });
             g.appendChild(cg);
             g.className = 'form-group full';
+        } else if (type === 'dob') {
+            const dobWrap = document.createElement('div');
+            dobWrap.className = 'dob-input';
+            const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const mSel = document.createElement('select'); mSel.id = `${id}_month`; mSel.name = `${id}_month`;
+            mSel.innerHTML = '<option value="">Month</option>' + MON.map((m,i) => `<option value="${i+1}">${m}</option>`).join('');
+            const dSel = document.createElement('select'); dSel.id = `${id}_day`; dSel.name = `${id}_day`;
+            dSel.innerHTML = '<option value="">Day</option>' + Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+            const ySel = document.createElement('select'); ySel.id = `${id}_year`; ySel.name = `${id}_year`;
+            const curY = new Date().getFullYear();
+            ySel.innerHTML = '<option value="">Year</option>' + Array.from({length:100},(_,i)=>`<option value="${curY-i}">${curY-i}</option>`).join('');
+            dobWrap.appendChild(mSel); dobWrap.appendChild(dSel); dobWrap.appendChild(ySel);
+            g.appendChild(dobWrap);
         } else if (type === 'phone') {
             const ph = document.createElement('div');
             ph.className = 'phone-input';
@@ -381,7 +394,7 @@
         grid.appendChild(buildGuestField(`${prefix}_firstName`, 'First Name *', 'text'));
         grid.appendChild(buildGuestField(`${prefix}_lastName`, 'Last Name *', 'text'));
         grid.appendChild(buildGuestField(`${prefix}_gender`, 'Gender *', 'select', ['Male','Female','Other']));
-        grid.appendChild(buildGuestField(`${prefix}_dob`, 'Date of Birth *', 'date'));
+        grid.appendChild(buildGuestField(`${prefix}_dob`, 'Date of Birth *', 'dob'));
 
         if (isAdult) {
             grid.appendChild(buildGuestField(`${prefix}_email`, 'Email', 'email'));
@@ -459,7 +472,7 @@
 
         for (let i = 0; i < nA; i++) {
             const p = `adult${i}`;
-            const required = [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob`,`${p}_mobile`,`${p}_nationality`,`${p}_referral`];
+            const required = [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob_month`,`${p}_dob_day`,`${p}_dob_year`,`${p}_mobile`,`${p}_nationality`,`${p}_referral`];
             if (i > 0) required.push(`${p}_relationship`);
             required.forEach(id => {
                 const el = document.getElementById(id);
@@ -469,7 +482,7 @@
         }
         for (let i = 0; i < nC; i++) {
             const p = `child${i}`;
-            [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob`,`${p}_childRelationship`].forEach(id => {
+            [`${p}_firstName`,`${p}_lastName`,`${p}_gender`,`${p}_dob_month`,`${p}_dob_day`,`${p}_dob_year`,`${p}_childRelationship`].forEach(id => {
                 const el = document.getElementById(id);
                 if (el && !el.value) { el.classList.add('invalid'); valid = false; }
                 else if (el) el.classList.remove('invalid');
@@ -490,6 +503,17 @@
     }
 
     function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+    const DOB_MONTHS = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function getDob(prefix) {
+        const m = gv(`${prefix}_dob_month`), d = gv(`${prefix}_dob_day`), y = gv(`${prefix}_dob_year`);
+        if (!m || !d || !y) return '';
+        return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    }
+    function fmtDob(prefix) {
+        const m = gv(`${prefix}_dob_month`), d = gv(`${prefix}_dob_day`), y = gv(`${prefix}_dob_year`);
+        if (!m || !d || !y) return '';
+        return `${DOB_MONTHS[parseInt(m)]} ${d}, ${y}`;
+    }
 
     function buildReview() {
         const rc = document.getElementById('reviewContent');
@@ -507,7 +531,7 @@
             html += `<div class="review-section"><h3>${i===0?'Primary Guest':'Adult '+(i+1)}</h3>`;
             html += `<div class="review-row"><span class="label">Name</span><span class="value">${gv(p+'_firstName')} ${gv(p+'_lastName')}</span></div>`;
             html += `<div class="review-row"><span class="label">Gender</span><span class="value">${gv(p+'_gender')}</span></div>`;
-            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${gv(p+'_dob')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${fmtDob(p)}</span></div>`;
             if (gv(p+'_email')) html += `<div class="review-row"><span class="label">Email</span><span class="value">${gv(p+'_email')}</span></div>`;
             const code = document.getElementById(p+'_mobile_code');
             html += `<div class="review-row"><span class="label">Mobile</span><span class="value">${code?code.value:''} ${gv(p+'_mobile')}</span></div>`;
@@ -523,7 +547,7 @@
             html += `<div class="review-section"><h3>Child ${i+1}</h3>`;
             html += `<div class="review-row"><span class="label">Name</span><span class="value">${gv(p+'_firstName')} ${gv(p+'_lastName')}</span></div>`;
             html += `<div class="review-row"><span class="label">Gender</span><span class="value">${gv(p+'_gender')}</span></div>`;
-            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${gv(p+'_dob')}</span></div>`;
+            html += `<div class="review-row"><span class="label">Date of Birth</span><span class="value">${fmtDob(p)}</span></div>`;
             html += `<div class="review-row"><span class="label">Relationship</span><span class="value">${gv(p+'_childRelationship')}</span></div>`;
             html += '</div>';
         }
@@ -549,7 +573,7 @@
             const code = document.getElementById(p+'_mobile_code');
             data.adults.push({
                 firstName: gv(p+'_firstName'), lastName: gv(p+'_lastName'),
-                gender: gv(p+'_gender'), dob: gv(p+'_dob'),
+                gender: gv(p+'_gender'), dob: getDob(p),
                 email: gv(p+'_email'), mobile: (code?code.value:'') + gv(p+'_mobile'),
                 nationality: gv(p+'_nationality'),
                 programs: [...document.querySelectorAll(`input[name="${p}_programs"]:checked`)].map(c=>c.value),
@@ -561,7 +585,7 @@
             const p = `child${i}`;
             data.children.push({
                 firstName: gv(p+'_firstName'), lastName: gv(p+'_lastName'),
-                gender: gv(p+'_gender'), dob: gv(p+'_dob'),
+                gender: gv(p+'_gender'), dob: getDob(p),
                 relationship: gv(p+'_childRelationship')
             });
         }

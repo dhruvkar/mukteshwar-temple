@@ -853,6 +853,9 @@ h3 {
 }
 .form-message p { color: rgba(255,255,255,0.85); font-size: 1.1rem; }
 
+.dob-input { display: flex; gap: 0.5rem; }
+.dob-input select { flex: 1; }
+
 .btn.loading { opacity: 0.6; pointer-events: none; }
 
 /* Invalid field */
