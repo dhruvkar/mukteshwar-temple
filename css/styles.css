@@ -840,14 +840,18 @@ h3 {
     padding: 4rem 2rem;
     text-align: center;
     display: none;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--gold, #c9a84c);
+    border-radius: 12px;
 }
 .form-message.show { display: block; }
 .form-message h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 0.8rem;
+    color: var(--gold, #c9a84c);
 }
-.form-message p { color: rgba(255,255,255,0.7); }
+.form-message p { color: rgba(255,255,255,0.85); font-size: 1.1rem; }
 
 .btn.loading { opacity: 0.6; pointer-events: none; }
 
