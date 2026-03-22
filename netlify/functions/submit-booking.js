@@ -46,6 +46,17 @@ async function ghl(path, method, body, token) {
   return data;
 }
 
+function formatDateForGHL(isoDate) {
+  const d = new Date(isoDate + 'T12:00:00Z');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const mon = months[d.getUTCMonth()];
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  const year = d.getUTCFullYear();
+  const dow = days[d.getUTCDay()];
+  return `${mon} ${day}, ${year} (${dow})`;
+}
+
 function generateBookingRef() {
   const ts = Date.now().toString(36).toUpperCase();
   const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -142,8 +153,8 @@ export default async (req, context) => {
         name: `${adult.firstName} ${adult.lastName} — ${arrival}`,
         status: 'open',
         customFields: [
-          { id: CF.arrival, value: arrival },
-          { id: CF.departure, value: departure },
+          { id: CF.arrival, value: formatDateForGHL(arrival) },
+          { id: CF.departure, value: formatDateForGHL(departure) },
           { id: CF.numAdults, value: String(numAdults) },
           { id: CF.numChildren, value: String(numChildren || 0) },
           { id: CF.bookingRef, value: bookingRef },
