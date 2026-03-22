@@ -35,8 +35,15 @@ async function ghl(path, method, body, token) {
     body: body ? JSON.stringify(body) : undefined,
   });
   const text = await res.text();
-  if (!res.ok) throw new Error(`GHL ${res.status}: ${text}`);
-  return JSON.parse(text);
+  const data = JSON.parse(text);
+  if (!res.ok) {
+    // Handle duplicate contact — GHL returns existing contactId in meta
+    if (res.status === 400 && data.meta?.contactId) {
+      return { contact: { id: data.meta.contactId }, duplicate: true };
+    }
+    throw new Error(`GHL ${res.status}: ${text}`);
+  }
+  return data;
 }
 
 function generateBookingRef() {
