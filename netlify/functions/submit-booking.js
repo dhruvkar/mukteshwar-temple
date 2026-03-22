@@ -160,7 +160,28 @@ export default async (req, context) => {
         }
       }
 
-      const opp = await ghl('/opportunities/', 'POST', oppBody, token);
+      let opp;
+      try {
+        opp = await ghl('/opportunities/', 'POST', oppBody, token);
+      } catch (oppErr) {
+        // Duplicate opportunity for this contact — search for existing one and update it
+        console.log('Opp create failed, searching existing:', oppErr.message);
+        const search = await ghl(`/opportunities/search?location_id=${LOCATION_ID}&contact_id=${contactId}&pipeline_id=${PIPELINE_ID}`, 'GET', null, token);
+        const existing = search.opportunities?.[0];
+        if (existing) {
+          // Update existing opportunity with new batch/booking info
+          opp = await ghl(`/opportunities/${existing.id}`, 'PUT', {
+            pipelineStageId: STAGE_NEW_REQUEST,
+            name: oppBody.name,
+            status: 'open',
+            customFields: oppBody.customFields,
+          }, token);
+          opp = { opportunity: { id: existing.id } };
+        } else {
+          console.error('Could not find or create opportunity for', contactId);
+          continue;
+        }
+      }
       results.push({
         adult: `${adult.firstName} ${adult.lastName}`,
         contactId,
