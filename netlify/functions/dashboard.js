@@ -21,6 +21,28 @@ const CF = {
   gender: 'y216f4IEtdZsQYFw2i4m',
 };
 
+// 2026 Batch schedule: [arrival, departure] pairs grouped by month
+// Each month can have 2 batches (Batch 1, Batch 2)
+const BATCH_SCHEDULE = [
+  { arrival: '2026-04-23', departure: '2026-04-26', label: 'April Batch 1' },
+  { arrival: '2026-04-27', departure: '2026-04-30', label: 'April Batch 2' },
+  { arrival: '2026-05-22', departure: '2026-05-25', label: 'May Batch 1' },
+  { arrival: '2026-05-28', departure: '2026-05-31', label: 'May Batch 2' },
+  { arrival: '2026-06-19', departure: '2026-06-22', label: 'June Batch 1' },
+  { arrival: '2026-06-24', departure: '2026-06-27', label: 'June Batch 2' },
+  { arrival: '2026-07-24', departure: '2026-07-27', label: 'July Batch 1' },
+  { arrival: '2026-07-30', departure: '2026-08-02', label: 'July Batch 2' },
+  { arrival: '2026-08-21', departure: '2026-08-24', label: 'August Batch 1' },
+  { arrival: '2026-08-28', departure: '2026-08-31', label: 'August Batch 2' },
+  { arrival: '2026-09-18', departure: '2026-09-21', label: 'September Batch 1' },
+  { arrival: '2026-10-03', departure: '2026-10-06', label: 'October Batch 1' },
+  { arrival: '2026-10-23', departure: '2026-10-26', label: 'October Batch 2' },
+  { arrival: '2026-11-20', departure: '2026-11-23', label: 'November Batch 1' },
+  { arrival: '2026-11-27', departure: '2026-11-30', label: 'November Batch 2' },
+  { arrival: '2026-12-20', departure: '2026-12-23', label: 'December Batch 1' },
+  { arrival: '2026-12-27', departure: '2026-12-30', label: 'December Batch 2' },
+];
+
 // Pipeline stages
 const STAGES = {
   '86b0364d-2494-4f88-9e15-8cff9c0888d0': { name: 'New Request', color: '#f59e0b', icon: '🆕' },
@@ -60,6 +82,18 @@ function formatDate(d) {
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   return `${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} (${days[d.getUTCDay()]})`;
+}
+
+function toISODate(d) {
+  if (!d) return '';
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+}
+
+function getBatchLabel(arrivalDate) {
+  if (!arrivalDate) return null;
+  const iso = toISODate(arrivalDate);
+  const match = BATCH_SCHEDULE.find(b => b.arrival === iso);
+  return match ? match.label : null;
 }
 
 function batchKey(arrival, departure) {
@@ -137,11 +171,13 @@ export default async (req) => {
     const key = batchKey(arrivalRaw, departureRaw);
 
     if (!batches[key]) {
+      const label = getBatchLabel(arrival);
       batches[key] = {
         arrival,
-        arrivalStr: arrivalRaw,
+        arrivalStr: formatDate(arrival),
         departure,
-        departureStr: departureRaw,
+        departureStr: formatDate(departure),
+        label: label || `${formatDate(arrival)} batch`,
         guests: [],
         childrenCount: 0,
         childrenDetails: [],
@@ -332,7 +368,7 @@ export default async (req) => {
     return `
     <div class="batch ${isPast ? 'past' : ''}">
       <div class="batch-header">
-        <div class="batch-dates">${batch.arrivalStr || '?'} → ${batch.departureStr || '?'}</div>
+        <div class="batch-dates">${batch.label}<span style="font-weight:400;font-size:0.85rem;color:#8a7968;margin-left:0.5rem">${batch.arrivalStr} → ${batch.departureStr}</span></div>
         <div class="batch-stats">
           <span class="stat">👤 ${adultCount} adult${adultCount !== 1 ? 's' : ''}</span>
           ${batch.childrenCount > 0 ? `<span class="stat">👶 ${batch.childrenCount} child${batch.childrenCount !== 1 ? 'ren' : ''}</span>` : ''}
