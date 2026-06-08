@@ -1,27 +1,25 @@
 // Mukteshwar Temple Booking → GHL Contacts + Opportunities
 // Each adult gets a contact + opportunity. Children stored as text on primary guest's opp.
-// Token read from Netlify Blobs (refreshed by scheduled function)
-
-import { getStore } from "@netlify/blobs";
+// Token from the GHL_PRIVATE_INTEGRATION_KEY_MUKTESHWAR env var (Private Integration Token)
 
 const GHL_API = 'https://services.leadconnectorhq.com';
-const LOCATION_ID = 'zd0Ap2ILf3AkM2ita9RX';
-const PIPELINE_ID = 'P5JDbGjoehBLTgTP9ge5';
-const STAGE_NEW_REQUEST = '86b0364d-2494-4f88-9e15-8cff9c0888d0';
+const LOCATION_ID = 'dSWmgHWU494I2VfCfwqq';
+const PIPELINE_ID = 'pquTLFgUZZ3vmHqVp6to';
+const STAGE_NEW_REQUEST = '5d066675-3820-4c1f-8f3d-3ac18dbff57b';
 
 const CF = {
-  gender: 'y216f4IEtdZsQYFw2i4m',
-  nationality: 'iy56xAcEjv5YHxFR1osZ',
-  ishaPrograms: 'Vk5IngohyTwRKrXncBJs',
-  referralSource: 'agTawIG7DXvWBvI36CDU',
-  relationship: 'sSjPovxKA1T1lKZY8Xkc',
-  arrival: 'L66A6SLllDUzKGA4SdQc',
-  departure: 'AdNXERkDqaJkWAjbRgvk',
-  numAdults: 'MsxVxmHe5epiNlijCeFq',
-  numChildren: 'nHviMt93RWSVMQsczyxf',
-  childrenDetails: 'Yd4quWOkEO5ydqs2dVGk',
-  bookingRef: 'rDRkeA9AMZVdnEjxzbkE',
-  isPrimary: 'ltj6GB9X29ErcRAYzAos',
+  gender: '1lEjwPbDTq9RBKwYW9NT',
+  nationality: 'E2n191lQPA6efn3Nay7n',
+  ishaPrograms: 'tiyqv4CA4ft7pfnOeaHT',
+  referralSource: 'plAlRc0tvLEA7k2y1a7H',
+  relationship: 'hmQO9dhZ5K9I20osgljG',
+  arrival: '6KIa8gSjKA4Os9kgaCt6',
+  departure: 'tcElwq52alPZh0rG4qPe',
+  numAdults: 'eWXkNgl0DWMlXdEw2XPV',
+  numChildren: 'V04mnj2xWPa7jgBR4pl0',
+  childrenDetails: 'GY9NgtWmfQC1gQMIwxO0',
+  bookingRef: 'xrNAeSv6YhCVR5wZlSB7',
+  isPrimary: 'kBbdgkHyvVzi3MWbcT8x',
 };
 
 async function ghl(path, method, body, token) {
@@ -85,15 +83,10 @@ export default async (req, context) => {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers });
   }
 
-  // Get GHL token from Netlify Blobs
-  let token;
-  try {
-    const store = getStore("ghl-tokens");
-    const stored = await store.get("mukteshwar", { type: "json" });
-    token = stored?.accessToken;
-    if (!token) throw new Error("No token in store");
-  } catch (err) {
-    console.error('Token error:', err.message);
+  // GHL Private Integration Token from env
+  const token = process.env.GHL_PRIVATE_INTEGRATION_KEY_MUKTESHWAR;
+  if (!token) {
+    console.error('Missing GHL_PRIVATE_INTEGRATION_KEY_MUKTESHWAR env var');
     return new Response(JSON.stringify({ error: 'Server configuration error' }), { status: 500, headers });
   }
 

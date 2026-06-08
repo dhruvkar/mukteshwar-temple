@@ -2,23 +2,21 @@
 // Real-time view of all batches, headcounts, and guest details
 // Pulls live from GHL API on every page load
 
-import { getStore } from "@netlify/blobs";
-
 const GHL_API = 'https://services.leadconnectorhq.com';
-const LOCATION_ID = 'zd0Ap2ILf3AkM2ita9RX';
-const PIPELINE_ID = 'P5JDbGjoehBLTgTP9ge5';
+const LOCATION_ID = 'dSWmgHWU494I2VfCfwqq';
+const PIPELINE_ID = 'pquTLFgUZZ3vmHqVp6to';
 const BATCH_CAP = 30;
 
 // Custom field IDs
 const CF = {
-  arrival: 'L66A6SLllDUzKGA4SdQc',
-  departure: 'AdNXERkDqaJkWAjbRgvk',
-  numAdults: 'MsxVxmHe5epiNlijCeFq',
-  numChildren: 'nHviMt93RWSVMQsczyxf',
-  childrenDetails: 'Yd4quWOkEO5ydqs2dVGk',
-  bookingRef: 'rDRkeA9AMZVdnEjxzbkE',
-  isPrimary: 'ltj6GB9X29ErcRAYzAos',
-  gender: 'y216f4IEtdZsQYFw2i4m',
+  arrival: '6KIa8gSjKA4Os9kgaCt6',
+  departure: 'tcElwq52alPZh0rG4qPe',
+  numAdults: 'eWXkNgl0DWMlXdEw2XPV',
+  numChildren: 'V04mnj2xWPa7jgBR4pl0',
+  childrenDetails: 'GY9NgtWmfQC1gQMIwxO0',
+  bookingRef: 'xrNAeSv6YhCVR5wZlSB7',
+  isPrimary: 'kBbdgkHyvVzi3MWbcT8x',
+  gender: '1lEjwPbDTq9RBKwYW9NT',
 };
 
 // 2026 Batch schedule: [arrival, departure] pairs grouped by month
@@ -45,11 +43,11 @@ const BATCH_SCHEDULE = [
 
 // Pipeline stages
 const STAGES = {
-  '86b0364d-2494-4f88-9e15-8cff9c0888d0': { name: 'New Request', color: '#f59e0b', icon: '🆕' },
-  '0da1ffaf-e62f-4560-9107-1cec50571b31': { name: 'Under Review', color: '#3b82f6', icon: '🔍' },
-  'e1ccf89d-aa6e-4ad6-8888-319a69724e01': { name: 'Approved', color: '#10b981', icon: '✅' },
-  '92a9d8e9-1fe9-4657-95bd-a4765bda04f6': { name: 'Waitlisted', color: '#8b5cf6', icon: '⏳' },
-  '269e08c7-fcff-42d0-a025-7036a3e11177': { name: 'Rejected', color: '#ef4444', icon: '❌' },
+  '5d066675-3820-4c1f-8f3d-3ac18dbff57b': { name: 'New Request', color: '#f59e0b', icon: '🆕' },
+  '22620551-68aa-4088-9e6d-9837a24dffdd': { name: 'Under Review', color: '#3b82f6', icon: '🔍' },
+  '97e7c88f-dcf4-4901-99b7-196b2c541c81': { name: 'Approved', color: '#10b981', icon: '✅' },
+  'a14308ca-1268-49c7-9ea2-b37339159b4e': { name: 'Waitlisted', color: '#8b5cf6', icon: '⏳' },
+  '70a7bb00-8ce7-4578-ab58-ce938bb5df8a': { name: 'Rejected', color: '#ef4444', icon: '❌' },
 };
 
 async function ghlGet(path, token) {
@@ -108,15 +106,10 @@ export default async (req) => {
     return new Response('🔒 Access denied', { status: 401, headers: { 'Content-Type': 'text/plain' } });
   }
 
-  // Get GHL token
-  let token;
-  try {
-    const store = getStore("ghl-tokens");
-    const stored = await store.get("mukteshwar", { type: "json" });
-    token = stored?.accessToken;
-    if (!token) throw new Error("No token");
-  } catch (err) {
-    return new Response(`Token error: ${err.message}`, { status: 500 });
+  // GHL Private Integration Token from env
+  const token = process.env.GHL_PRIVATE_INTEGRATION_KEY_MUKTESHWAR;
+  if (!token) {
+    return new Response('Token error: missing GHL_PRIVATE_INTEGRATION_KEY_MUKTESHWAR', { status: 500 });
   }
 
   // Fetch all opportunities (paginate if needed)
