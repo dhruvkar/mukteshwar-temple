@@ -312,9 +312,13 @@
         { label: 'December 27–30, 2026', arrival: '2026-12-27', departure: '2026-12-30' },
     ];
 
-    // Populate batch dropdown
+    // Populate batch dropdown — only show batches that haven't started yet.
+    // A batch is hidden once its arrival date is today or in the past.
+    // opt.value stays the original BATCHES index so downstream lookups still work.
     const batchSel = document.getElementById('batchSelect');
+    const todayStr = new Date().toLocaleDateString('en-CA'); // local YYYY-MM-DD
     BATCHES.forEach((b, i) => {
+        if (b.arrival <= todayStr) return; // batch already started — skip
         const opt = document.createElement('option');
         opt.value = i;
         opt.textContent = b.label;
