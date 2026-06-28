@@ -5,3 +5,14 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# --- TEMPORARY: site taken offline behind an under-construction page ---
+# Every request (pages and function endpoints) is rewritten to the
+# under-construction page, so no real content is reachable.
+# To bring the site back, delete this block (down to the end marker).
+[[redirects]]
+  from = "/*"
+  to = "/under-construction.html"
+  status = 200
+  force = true
+# --- END TEMPORARY ---

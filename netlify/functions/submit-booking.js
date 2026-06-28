@@ -69,6 +69,13 @@ function formatChildrenDetails(children) {
 }
 
 export default async (req, context) => {
+  // --- TEMPORARY: site offline / under construction. Remove this block to restore. ---
+  return new Response('Service temporarily unavailable.', {
+    status: 503,
+    headers: { 'Content-Type': 'text/plain', 'Retry-After': '3600' },
+  });
+  // --- END TEMPORARY ---
+
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',

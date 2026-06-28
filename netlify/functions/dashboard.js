@@ -99,6 +99,13 @@ function batchKey(arrival, departure) {
 }
 
 export default async (req) => {
+  // --- TEMPORARY: site offline / under construction. Remove this block to restore. ---
+  return new Response('Service temporarily unavailable.', {
+    status: 503,
+    headers: { 'Content-Type': 'text/plain', 'Retry-After': '3600' },
+  });
+  // --- END TEMPORARY ---
+
   // Simple auth via query param
   const url = new URL(req.url);
   const key = url.searchParams.get('key');
